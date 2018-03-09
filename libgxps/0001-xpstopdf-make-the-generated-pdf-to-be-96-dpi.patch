@@ -1,0 +1,32 @@
+From a3c8aa6aa91158ae491d4d66255effd7c67d7e16 Mon Sep 17 00:00:00 2001
+From: Ignacio Casal Quinteiro <qignacio@amazon.com>
+Date: Fri, 9 Mar 2018 16:25:11 +0100
+Subject: [PATCH] xpstopdf: make the generated pdf to be 96 dpi
+
+Otherwise cairo will use 72 as dpi and we will endup with
+bigger pdf files than what they are supposed to be.
+---
+ tools/gxps-print-converter.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tools/gxps-print-converter.c b/tools/gxps-print-converter.c
+index 140efde..f635614 100644
+--- a/tools/gxps-print-converter.c
++++ b/tools/gxps-print-converter.c
+@@ -268,11 +268,11 @@ _gxps_converter_print_get_output_size (GXPSPrintConverter *converter,
+ 
+         if (output_width) {
+                 *output_width = converter->paper_width == 0 ?
+-                        page_width : converter->paper_width;
++                        page_width * 72.0 / 96.0 : converter->paper_width;
+         }
+ 
+         if (output_height) {
+                 *output_height = converter->paper_height == 0 ?
+-                        page_height : converter->paper_height;
++                        page_height * 72.0 / 96.0 : converter->paper_height;
+         }
+ }
+-- 
+2.7.4
+

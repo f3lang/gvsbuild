@@ -797,6 +797,7 @@ class Project_libgxps(Tarball, Project):
             dependencies = ['meson', 'ninja', 'pkg-config', 'glib', 'libarchive', 'cairo', 'libpng', 'libjpeg-turbo', 'libtiff-4', 'gtk3', ],
             patches = [
                 '001-ignore-m-lib.patch',
+                '0001-xpstopdf-make-the-generated-pdf-to-be-96-dpi.patch',
                 ],
             )
 
